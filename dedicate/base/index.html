@@ -13,6 +13,7 @@
 
   <script>
     
+    
     window.onload = function () {
       var id1 = document.getElementById('id1');
       var id2 = document.getElementById('id2');
@@ -20,6 +21,7 @@
       id3.value = parseInt(id1.value) + parseInt(id2.value);
       var worker
       if (window.Worker) {
+        // web worker 不支持读取本地文件，因此，如果需要加载文件，需使用静态资源服务器
         worker = new Worker('worker.js');
       } else {
         window.alert('浏览器不支持web worker')
