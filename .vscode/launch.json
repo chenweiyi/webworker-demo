@@ -5,10 +5,61 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "msedge",
+      "type": "chrome",
       "request": "launch",
       "name": "base",
       "url": "http://localhost:5500/dedicate/base/index.html",
-    }
+      
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "close - main",
+      "url": "http://localhost:5500/dedicate/close/main-close/index.html",
+      "webRoot": "${workspaceFolder}",
+      "runtimeArgs": [
+        "--auto-open-devtools-for-tabs"
+      ]
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "close - worker",
+      "url": "http://localhost:5500/dedicate/close/worker-close/index.html",
+      "webRoot": "${workspaceFolder}",
+      "runtimeArgs": [
+        "--auto-open-devtools-for-tabs"
+      ]
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "importScripts - base",
+      "url": "http://localhost:5500/dedicate/importScripts/base/index.html",
+      "webRoot": "${workspaceFolder}",
+      "runtimeArgs": [
+        "--auto-open-devtools-for-tabs"
+      ]
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "importScripts - module",
+      "url": "http://localhost:5500/dedicate/importScripts/module/index.html",
+      "webRoot": "${workspaceFolder}",
+      "runtimeArgs": [
+        "--auto-open-devtools-for-tabs"
+      ]
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "transferData",
+      "url": "http://localhost:5500/dedicate/transfer-data/index.html",
+      "webRoot": "${workspaceFolder}",
+      "runtimeArgs": [
+        "--auto-open-devtools-for-tabs"
+      ]
+    },
   ]
 }

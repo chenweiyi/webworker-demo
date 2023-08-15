@@ -3,30 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>计算器demo</title>
+  <title>已模块方式加载js文件</title>
 </head>
 <body>
   <p>输入前两个数，得到相加的结果</p>
   <input type="text" id="id1" value="1"> + 
   <input type="text" id="id2" value="2"> =
   <input type="text" id="id3" value="">
-
   <script>
     window.onload = function () {
       var id1 = document.getElementById('id1');
       var id2 = document.getElementById('id2');
       var id3 = document.getElementById('id3');
-      id3.value = parseInt(id1.value) + parseInt(id2.value);
       var worker
       if (window.Worker) {
-        // web worker 不支持读取本地文件，因此，如果需要加载文件，需使用静态资源服务器
-        // 如果不使用静态资源服务器，则会报如下错误：
-        // Uncaught DOMException: Failed to construct 'Worker': Script at 'file:///Users/zyb/test/web-worker-demo/dedicate/base/worker.js' cannot be accessed from origin 'null'.
-        worker = new Worker('worker.js');
+        // 这里传第二个参数{type: 'module'}, 否则会报错：Uncaught SyntaxError: Cannot use import statement outside a module
+        worker = new Worker('worker.js', {
+          type: 'module'
+        });
       } else {
         window.alert('浏览器不支持web worker')
         throw new Error('浏览器不支持web worker')
       }
+
+      worker.onmessage = function(e) {
+        console.log('Message received from worker:', e.data);
+        id3.value = e.data
+      }
+      worker.postMessage([id1.value, id2.value])
 
       id1.onchange = function () {
         worker.postMessage([id1.value, id2.value])
@@ -35,19 +39,6 @@
       id2.onchange = function () {
         worker.postMessage([id1.value, id2.value])
       }
-
-      worker.onmessage = function (e) {
-        id3.value = e.data
-      }
-
-      worker.onerror = function (e) {
-        console.error('error file: ' + e.filename + ' \n error line number: ' + e.lineno + '\n error message: ' + e.message)
-      }
-
-      worker.onmessageerror = function (e) {
-        console.log('worker message error', e)
-      }
-
     }
   </script>
 </body>

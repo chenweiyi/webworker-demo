@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>web worker close2</title>
+</head>
+<body>
+  <script>
+    // 主线程关闭worker
+    const worker = new Worker('./worker.js')
+    worker.onmessage = (e) => {
+      console.log(e.data)
+    }
+    worker.postMessage('hello from main')
+  </script>
+</body>
+</html>

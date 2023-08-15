@@ -1,0 +1,3 @@
+这里worker里面的postMessage事件和时间循环机制似乎不同，worker线程里的postMessage发送后，事件就发出去了，主线程收到事件就会开始执行，和worker线程里面的宏任务没有前后关系。
+
+可以把worker线程里面循环的值改大一些试试。

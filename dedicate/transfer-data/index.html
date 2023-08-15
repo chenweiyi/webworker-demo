@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据传输</title>
+</head>
+<body>
+  <script>
+    const worker = new Worker('worker.js');
+
+    const fun = () => {}
+    const obj = { a: 2 }
+    const arr = [1,2]
+
+    worker.onmessage = (e) => {
+      console.log('Message received from worker:', e.data);
+      console.log('equal? ', obj === e.data)
+    }
+
+    // worker.postMessage(fun); // Failed to execute 'postMessage' on 'Worker': () => {} could not be cloned.
+    // worker.postMessage(obj)
+    worker.postMessage(arr)
+
+  </script>
+</body>
+</html>
